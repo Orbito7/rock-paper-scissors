@@ -1,0 +1,44 @@
+.image-button {
+    max-width: 350px;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 50%;
+}
+
+.reset-button {
+    background-color: #fd3900;
+    border: #fd3900;
+    padding: 2rem;
+    border-radius: 20px;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+h1 {
+    text-align: center;
+    color: #fd3900;
+}
+
+p {
+    text-align: center;
+}
+
+.results-container {
+display: flex;
+justify-content: center;
+gap: 4rem;
+font-size: 1.5rem;
+}
+
+.reset-button-container {
+display: flex;
+margin-top: 2rem;
+justify-content: center;
+}
+
