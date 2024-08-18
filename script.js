@@ -6,40 +6,28 @@ function getComputerChoice() {
   let rng = Math.floor(Math.random() * 3) + 1;
 
   if (rng == 1) {
-    return "rock";
+    return "fire";
   } else if (rng == 2) {
-    return "paper";
+    return "water";
   } else {
-    return "scissors";
+    return "grass";
   }
-}
-
-function getHumanChoice() {
-  let choice = "";
-
-  while (choice != "rock" && choice != "paper" && choice != "scissors") {
-    choice = prompt("Choose Rock Paper or Scissors").toLowerCase();
-  }
-
-  return choice;
 }
 
 function playRound(humanChoice, computerChoice) {
   roundNumber++;
   if (humanChoice == computerChoice) {
-    rounds.textContent +=
-      "No one wins, it was a tie, both chose " + humanChoice + ".\n";
+    rounds.textContent = "Current Round: No one wins, it was a tie, both chose " + humanChoice;
   } else if (
-    (humanChoice == "rock" && computerChoice == "scissors") ||
-    (humanChoice == "paper" && computerChoice == "rock") ||
-    (humanChoice == "scissors" && computerChoice == "paper")
+    (humanChoice == "fire" && computerChoice == "grass") ||
+    (humanChoice == "water" && computerChoice == "fire") ||
+    (humanChoice == "grass" && computerChoice == "water")
   ) {
-    rounds.textContent +=
-      "You Win! " + humanChoice + " beats " + computerChoice + ".\n";
+    rounds.textContent = "Current Round: You Win! " + humanChoice + " beats " + computerChoice;
     humanScore++;
   } else {
-    rounds.textContent +=
-      "You lose! " + computerChoice + " beats " + humanChoice + ".\n";
+    rounds.textContent =
+      "Current Round: You lose! " + computerChoice + " beats " + humanChoice;
     computerScore++;
   }
 }
@@ -53,48 +41,65 @@ function playGame(choice) {
     results.textContent =
       "Current Score: " + humanScore + " to " + computerScore;
   } else {
-    rockButton.disabled = true;
-    paperButton.disabled = true;
-    scissorsButton.disabled = true;
+    fireButton.classList.add("disabled");
+    waterButton.classList.add("disabled");
+    grassButton.classList.add("disabled");
+
     let resetButton = document.createElement("button");
     resetButton.textContent = "Play Again";
-    gameContainer.append(resetButton);
+    resetButton.classList.add("reset-button");
+    
+    let resetButtonContainer = document.createElement("div");
+    resetButtonContainer.classList.add("reset-button-container");
+    
+    resetButtonContainer.append(resetButton);
+    gameContainer.append(resetButtonContainer);
+
     resetButton.addEventListener("click", () => {
       results.textContent = "";
       rounds.textContent = "";
       roundNumber = 0;
       computerScore = 0;
       humanScore = 0;
-      rockButton.disabled = false;
-      paperButton.disabled = false;
-      scissorsButton.disabled = false;
-      gameContainer.removeChild(resetButton);
+      fireButton.classList.remove("disabled");
+      waterButton.classList.remove("disabled");
+      grassButton.classList.remove("disabled");
+      gameContainer.removeChild(resetButtonContainer);
     });
 
     if (humanScore == computerScore) {
       results.textContent = "Tie Game, both had a score of " + humanScore;
     } else if (humanScore < computerScore) {
-      results.textContent = "You Lose! " + computerScore + " to " + humanScore;
+      results.textContent = "Final Score: You Lose! " + computerScore + " to " + humanScore;
     } else {
-      results.textContent = "You Win! " + humanScore + " to " + computerScore;
+      results.textContent = "Final Score: You Win! " + humanScore + " to " + computerScore;
     }
   }
 }
 let buttonContainer = document.querySelector("#buttonContainer");
+buttonContainer.classList.add("button-container")
 
-let rockButton = document.createElement("button");
-let paperButton = document.createElement("button");
-let scissorsButton = document.createElement("button");
+let fireButton = document.createElement("img");
+let waterButton = document.createElement("img");
+let grassButton = document.createElement("img");
 
-buttonContainer.appendChild(rockButton);
-buttonContainer.appendChild(paperButton);
-buttonContainer.appendChild(scissorsButton);
+fireButton.src = "images/fire.png";
+waterButton.src = "images/water.png";
+grassButton.src = "images/grass.png";
+
+fireButton.classList.add("image-button");
+waterButton.classList.add("image-button");
+grassButton.classList.add("image-button");
+
+buttonContainer.appendChild(fireButton);
+buttonContainer.appendChild(waterButton);
+buttonContainer.appendChild(grassButton);
 
 gameContainer.append(buttonContainer);
 
-rockButton.textContent = "Rock";
-paperButton.textContent = "Paper";
-scissorsButton.textContent = "Scissors";
+fireButton.textContent = "Fire";
+waterButton.textContent = "Water";
+grassButton.textContent = "Grass";
 
 let children = buttonContainer.children;
 
@@ -108,8 +113,13 @@ for (let i = 0; i < children.length; i++) {
 }
 
 let results = document.createElement("div");
+results.classList.add("results");
 let rounds = document.createElement("div");
-rounds.style.whiteSpace = "pre-line";
+rounds.classList.add("rounds");
+let resultsContainer = document.createElement("div");
+resultsContainer.classList.add("results-container");
 
-gameContainer.append(rounds);
-gameContainer.append(results);
+resultsContainer.append(rounds);
+resultsContainer.append(results);
+
+gameContainer.append(resultsContainer);
