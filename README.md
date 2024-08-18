@@ -1,6 +1,6 @@
 # rock-paper-scissors
 
-Rock paper scissors game that works thourgh the console.
+Rock paper scissors game with a elemental twist.
 
 # Rules
-Choose an option (rock, paper or scissors), computer will choose one, rock beats scissors, scissors beats paper, paper beats rock.
+Choose an option (Fire, Water or Grass), computer will also choose one. Fire beats Grass, Grass beats Water, Water beats Fire.
